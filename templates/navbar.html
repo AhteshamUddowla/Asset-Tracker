@@ -1,0 +1,17 @@
+<!-- Header Section -->
+<header>
+    <div>
+      <nav>
+        <ul>
+          <li><a href="{% url 'assets' %}">Assets</a></li>
+          
+          {% if request.user.is_authenticated %}
+          <li><a href="#">Logout</a></li>
+          {% else %}
+          <li><a href="#">Login/Sign Up</a></li>
+          {% endif %}
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
