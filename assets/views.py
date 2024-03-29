@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Asset
@@ -27,6 +27,11 @@ def login_view(request):
             messages.error(request, 'Username or password is incorrect')
 
     return render(request, 'login.html')
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, "User was logged out!")
+    return redirect('login')
 
 
 def assets_view(request):
