@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Asset
@@ -51,6 +52,14 @@ def logout_view(request):
     messages.info(request, "User was logged out!")
     return redirect('login')
 
+@login_required(login_url='login')
 def assets_view(request):
-    assets = Asset.objects.all()
-    return render(request, 'assets/assets.html', {'assets':assets})
+    # filter by company so that one company can't see the assets of others
+    company = request.user.customuser.company
+    assigned_assets = Asset.objects.filter(company=company, assigned=True).order_by('id')
+    unassigned_assets = Asset.objects.filter(company=company, assigned=False).order_by('id')
+    context = {
+        'assigned_assets': assigned_assets,
+        'unassigned_assets': unassigned_assets,
+    }
+    return render(request, 'assets/assets.html', context)

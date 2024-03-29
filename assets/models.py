@@ -7,6 +7,7 @@ class CustomUser(models.Model):
     username = models.CharField(max_length=200, null=True, blank=True)
     email = models.EmailField(max_length=500, null=True, blank=True)
     phone_no = models.CharField(max_length=20, null=True, blank=True)
+    company = models.ForeignKey('Company', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.username)
@@ -34,6 +35,7 @@ class Asset(models.Model):
     ]
 
     employee = models.OneToOneField(Employee, on_delete=models.CASCADE, blank=True, null=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=True, null=True)
     asset_type = models.CharField(max_length=20, choices=ASSET_TYPES)
     brand = models.CharField(max_length=50, blank=True, null=True)
     model = models.CharField(max_length=50, blank=True, null=True)
@@ -41,6 +43,7 @@ class Asset(models.Model):
     returned_date = models.DateField(null=True, blank=True)
     assigned_condition = models.CharField(max_length=100, null=True, blank=True)
     returned_condition = models.CharField(max_length=100, null=True, blank=True)
+    assigned = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.asset_type} - {self.id}"

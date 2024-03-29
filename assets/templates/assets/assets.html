@@ -1,29 +1,56 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h2 style="text-align: center;"><u>Unassigned Assets</u></h2>
     <table border="1" align="center" margin-top="40px" style="border-collapse: collapse;">
         <tr>
-            <th>SL No</th>
-            <th>Company</th>
-            <th>Asset Type</th>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Assigned Date</th>
-            <th>Returned Date</th>
-            <th>Assigned Condition</th>
-            <th>Returned Condition</th>
+            <th style="padding: 8px;">SL No</th>
+            <th style="padding: 8px;">Company</th>
+            <th style="padding: 8px;">Asset Type</th>
+            <th style="padding: 8px;">Brand</th>
+            <th style="padding: 8px;">Model</th>
         </tr>
-        {% for asset in assets %}
-            <tr  align="center">
-                <td>{{asset.id}}</td>
-                <td>{{ asset.employee.company.name }}</td>
-                <td>{{asset.asset_type}}</td>
-                <td>{{asset.brand}}</td>
-                <td>{{asset.model}}</td>
-                <td>{{asset.assigned_date}}</td>
-                <td>{{asset.returned_date}}</td>
-                <td>{{asset.assigned_condition}}</td>
-                <td>{{asset.returned_condition}}</td>
+        {% for asset in unassigned_assets %}
+            <tr align="center">
+                <td style="padding: 8px;">{{asset.id}}</td>
+                <td style="padding: 8px;">{{asset.company.name}}</td>
+                <td style="padding: 8px;">{{asset.asset_type}}</td>
+                <td style="padding: 8px;">{{asset.brand}}</td>
+                <td style="padding: 8px;">{{asset.model}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2 style="text-align: center;"><u>Assigned Assets</u></h2>
+    <table border="1" align="center" margin-top="40px" style="border-collapse: collapse;">
+        <tr>
+            <th style="padding: 8px;">SL No</th>
+            <th style="padding: 8px;">Company</th>
+            <th style="padding: 8px;">Asset Type</th>
+            <th style="padding: 8px;">Brand</th>
+            <th style="padding: 8px;">Model</th>
+            <th style="padding: 8px;">Assigned To</th>
+            <th style="padding: 8px;">Phone No</th>
+            <th style="padding: 8px;">Email</th>
+            <th style="padding: 8px;">Assigned Date</th>
+            <th style="padding: 8px;">Returned Date</th>
+            <th style="padding: 8px;">Assigned Condition</th>
+            <th style="padding: 8px;">Returned Condition</th>
+        </tr>
+        {% for asset in assigned_assets %}
+            <tr align="center">
+                <td style="padding: 8px;">{{asset.id}}</td>
+                <td style="padding: 8px;">{{asset.company.name}}</td>
+                <td style="padding: 8px;">{{asset.asset_type}}</td>
+                <td style="padding: 8px;">{{asset.brand}}</td>
+                <td style="padding: 8px;">{{asset.model}}</td>
+                <td style="padding: 8px;">{{asset.employee.user}}</td>
+                <td style="padding: 8px;">{{asset.employee.user.phone_no}}</td>
+                <td style="padding: 8px;">{{asset.employee.user.email}}</td>
+                <td style="padding: 8px;">{{asset.assigned_date}}</td>
+                <td style="padding: 8px;">{{asset.returned_date}}</td>
+                <td style="padding: 8px;">{{asset.assigned_condition}}</td>
+                <td style="padding: 8px;">{{asset.returned_condition}}</td>
             </tr>
         {% endfor %}
     </table>
