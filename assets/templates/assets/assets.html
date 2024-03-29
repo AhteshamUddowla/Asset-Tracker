@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Tracker</title>
+
+    <style>
+        /* Style for the table */
+        table {
+            border-collapse: collapse; /* Merge the table borders */
+        }
+    
+        /* Style for the cells */
+        td, th {
+            border: 1px solid black; /* Add border to cells */
+        }
+    </style>
+</head>
+<body>
+    <table align="center">
+        <tr>
+            <th>SL No</th>
+            <th>Asset Type</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Assigned Date</th>
+            <th>Returned Date</th>
+            <th>Assigned Condition</th>
+            <th>Returned Condition</th>
+        </tr>
+        {% for asset in assets %}
+            <tr  align="center">
+                <td>{{asset.id}}</td>
+                <td>{{asset.asset_type}}</td>
+                <td>{{asset.brand}}</td>
+                <td>{{asset.model}}</td>
+                <td>{{asset.assigned_date}}</td>
+                <td>{{asset.returned_date}}</td>
+                <td>{{asset.assigned_condition}}</td>
+                <td>{{asset.returned_condition}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
