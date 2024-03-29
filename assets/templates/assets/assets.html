@@ -4,6 +4,7 @@
     <table border="1" align="center" margin-top="40px" style="border-collapse: collapse;">
         <tr>
             <th>SL No</th>
+            <th>Company</th>
             <th>Asset Type</th>
             <th>Brand</th>
             <th>Model</th>
@@ -15,6 +16,7 @@
         {% for asset in assets %}
             <tr  align="center">
                 <td>{{asset.id}}</td>
+                <td>{{ asset.employee.company.name }}</td>
                 <td>{{asset.asset_type}}</td>
                 <td>{{asset.brand}}</td>
                 <td>{{asset.model}}</td>

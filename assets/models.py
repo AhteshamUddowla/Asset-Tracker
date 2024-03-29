@@ -7,10 +7,23 @@ class CustomUser(models.Model):
     username = models.CharField(max_length=200, null=True, blank=True)
     email = models.EmailField(max_length=500, null=True, blank=True)
     phone_no = models.CharField(max_length=20, null=True, blank=True)
-    job_title = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
         return str(self.username)
+    
+class Company(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Employee(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    job_title = models.CharField(max_length=20, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
 
 class Asset(models.Model):
     ASSET_TYPES = [
@@ -20,6 +33,7 @@ class Asset(models.Model):
         ('PC', 'PC')
     ]
 
+    employee = models.OneToOneField(Employee, on_delete=models.CASCADE, blank=True, null=True)
     asset_type = models.CharField(max_length=20, choices=ASSET_TYPES)
     brand = models.CharField(max_length=50, blank=True, null=True)
     model = models.CharField(max_length=50, blank=True, null=True)
