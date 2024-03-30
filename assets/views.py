@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Asset
-from .forms import CustomUserCreationForm, AccountForm
+from .forms import CustomUserCreationForm, AccountForm, AssetForm
 
 # Create your views here.
 def login_view(request):
@@ -77,3 +77,17 @@ def account_view(request):
         
     context = {'form': form}
     return render(request, 'account.html', context)
+
+
+@login_required(login_url='login')
+def update_asset_view(request, pk):
+    asset = Asset.objects.get(id=pk)
+    form = AssetForm(instance=asset)
+
+    if request.method == 'POST':
+        form = AssetForm(request.POST, instance=asset)
+        if form.is_valid():
+            form.save()
+            return redirect('assets')
+    context = {'form':form}
+    return render(request, 'assets/asset_form.html', context)

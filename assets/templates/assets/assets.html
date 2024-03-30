@@ -9,6 +9,7 @@
             <th style="padding: 8px;">Asset Type</th>
             <th style="padding: 8px;">Brand</th>
             <th style="padding: 8px;">Model</th>
+            <th style="padding: 8px;">Update</th>
         </tr>
         {% for asset in unassigned_assets %}
             <tr align="center">
@@ -17,6 +18,7 @@
                 <td style="padding: 8px;">{{asset.asset_type}}</td>
                 <td style="padding: 8px;">{{asset.brand}}</td>
                 <td style="padding: 8px;">{{asset.model}}</td>
+                <td style="padding: 8px;"><a href="{% url 'update-asset' asset.id %}">Update</a></td>
             </tr>
         {% endfor %}
     </table>
@@ -30,6 +32,7 @@
             <th style="padding: 8px;">Brand</th>
             <th style="padding: 8px;">Model</th>
             <th style="padding: 8px;">Assigned To</th>
+            <th style="padding: 8px;">Job Title</th>
             <th style="padding: 8px;">Phone No</th>
             <th style="padding: 8px;">Email</th>
             <th style="padding: 8px;">Assigned Date</th>
@@ -45,6 +48,7 @@
                 <td style="padding: 8px;">{{asset.brand}}</td>
                 <td style="padding: 8px;">{{asset.model}}</td>
                 <td style="padding: 8px;">{{asset.employee.user}}</td>
+                <td style="padding: 8px;">{{asset.employee.job_title}}</td>
                 <td style="padding: 8px;">{{asset.employee.user.phone_no}}</td>
                 <td style="padding: 8px;">{{asset.employee.user.email}}</td>
                 <td style="padding: 8px;">{{asset.assigned_date}}</td>

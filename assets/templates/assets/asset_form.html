@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Edit Profile: </h2>
+    <h2>Edit Asset: </h2>
     <form action="" method="POST">
         {% csrf_token %}
         
         {% for field in form %}
         <div>
-            <label>{{field.label}}: </label>
-            {{field}} 
-        </div> 
+            <label>{{field.label}} </label>
+            {{field}}
+        </div>
         {% endfor %}
         <input type="submit" value="Submit" />
     </form>

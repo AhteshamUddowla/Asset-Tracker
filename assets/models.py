@@ -8,6 +8,7 @@ class CustomUser(models.Model):
     email = models.EmailField(max_length=500, null=True, blank=True)
     phone_no = models.CharField(max_length=20, null=True, blank=True)
     company = models.ForeignKey('Company', on_delete=models.CASCADE, null=True, blank=True)
+    job_title = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
         return str(self.username)
@@ -18,13 +19,13 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
-class Employee(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    job_title = models.CharField(max_length=20, null=True, blank=True)
+# class Employee(models.Model):
+#     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+#     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+#     job_title = models.CharField(max_length=20, null=True, blank=True)
 
-    def __str__(self):
-        return self.user.username
+#     def __str__(self):
+#         return self.user.username
 
 class Asset(models.Model):
     ASSET_TYPES = [
@@ -34,7 +35,7 @@ class Asset(models.Model):
         ('PC', 'PC')
     ]
 
-    employee = models.OneToOneField(Employee, on_delete=models.CASCADE, blank=True, null=True)
+    employee = models.OneToOneField(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=True, null=True)
     asset_type = models.CharField(max_length=20, choices=ASSET_TYPES)
     brand = models.CharField(max_length=50, blank=True, null=True)
