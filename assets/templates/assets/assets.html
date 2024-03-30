@@ -11,6 +11,7 @@
             <th style="padding: 8px;">Brand</th>
             <th style="padding: 8px;">Model</th>
             <th style="padding: 8px;">Update</th>
+            <th style="padding: 8px;">Delete</th>
         </tr>
         {% for asset in unassigned_assets %}
             <tr align="center">
@@ -20,6 +21,7 @@
                 <td style="padding: 8px;">{{asset.brand}}</td>
                 <td style="padding: 8px;">{{asset.model}}</td>
                 <td style="padding: 8px;"><a href="{% url 'update-asset' asset.id %}">Update</a></td>
+                <td style="padding: 8px;"><a href="{% url 'delete-asset' asset.id %}">Delete</a></td>
             </tr>
         {% endfor %}
     </table>

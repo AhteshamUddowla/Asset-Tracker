@@ -104,3 +104,10 @@ def update_asset_view(request, pk):
             return redirect('assets')
     context = {'form':form}
     return render(request, 'assets/asset_form.html', context)
+
+
+@login_required(login_url='login')
+def delete_asset_view(request, pk):
+    asset = Asset.objects.get(id=pk)
+    asset.delete()
+    return redirect('assets')
