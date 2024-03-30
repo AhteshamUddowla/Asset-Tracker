@@ -35,7 +35,7 @@ class Asset(models.Model):
         ('PC', 'PC')
     ]
 
-    employee = models.OneToOneField(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
+    employee = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=True, null=True)
     asset_type = models.CharField(max_length=20, choices=ASSET_TYPES)
     brand = models.CharField(max_length=50, blank=True, null=True)

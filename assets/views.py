@@ -80,6 +80,19 @@ def account_view(request):
 
 
 @login_required(login_url='login')
+def add_asset_view(request):
+    form = AssetForm()
+
+    if request.method == 'POST':
+        form = AssetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('assets')
+    context = {'form':form}
+    return render(request, 'assets/asset_form.html', context)
+
+
+@login_required(login_url='login')
 def update_asset_view(request, pk):
     asset = Asset.objects.get(id=pk)
     form = AssetForm(instance=asset)
